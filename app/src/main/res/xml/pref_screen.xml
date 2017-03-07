@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="url"
+        android:title="URL"
+        android:summary="Change URL for Data Download"
+        android:defaultValue="http://tednewardsandbox.site44.com/questions.json"
+
+        />
+    <EditTextPreference
+        android:key="downloadtime"
+        android:title="Download Interval"
+        android:summary="Change how often device checks for downloads"
+        android:numeric="integer"
+        android:defaultValue="1"
+        />
+</PreferenceScreen>
