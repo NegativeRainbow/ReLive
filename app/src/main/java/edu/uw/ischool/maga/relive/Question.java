@@ -12,6 +12,12 @@ public class Question {
     public String correctName;
     public String[] nameOptions;
 
+
+    /*
+     FOR UI GUYS
+     to call image ui go to stackoverflow.com/questions/5841710/get-user-image-from-facebook-graph-api
+     do img_value = new URL(blah lahblah) with blahblahablhah being the Question[i].displayUrl
+     */
     public Question(String type, String dataToShow, String dataURL, String correct, String[] nameOptions){
         this.type = type;
         this.displayUrl = dataToShow;

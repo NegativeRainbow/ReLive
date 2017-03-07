@@ -50,12 +50,15 @@ public class FacebookDataRepositiory {
             friendsobject = object.getJSONObject("friends");
             JSONArray jarray = friendsobject.getJSONArray("data");
             for(int i = 0; i < jarray.length();i++) {
+
+                //Friendslist is initialized at 10, if the number of friends from the JSON surpasses 10
+                //then the list will double the size and copy over all existing entries.
                 if (i == friendslist.length){
                     Friend[] temp = Arrays.copyOf(friendslist, friendslist.length*2);
                     friendslist = temp;
                 }
 
-                //Sets up object just grab a specific friend
+                //Sets up object to just grab one friend
                 JSONObject oneFriend = jarray.getJSONObject(i);
                 String friendname = oneFriend.getString("name");
                 int friendId = oneFriend.getInt("id");
@@ -143,11 +146,6 @@ public class FacebookDataRepositiory {
                     int pictureId = randomPicObject.getInt("id");
                     displayUrl = randomPicObject.getString("picture");
                     intentUrl = "https://www.facebook.com/photo.php?fbid=" + pictureId;
-                    /*
-                     FOR UI GUYS
-                     to call image ui go to stackoverflow.com/questions/5841710/get-user-image-from-facebook-graph-api
-                     do img_value = new URL(blah lahblah) with blahblahablhah being the quiz[i].displayUrl
-                     */
 
                 } catch (JSONException e) {
                     e.printStackTrace();
