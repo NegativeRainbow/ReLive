@@ -27,7 +27,7 @@ public class FacebookDataRepositiory {
         //Makes a graph api request to grab a json with a list of friends
         //and the posts, name, id, and albums of that friend
         GraphRequest request = GraphRequest.newMeRequest(
-                AccessToken.getCurrentAccessToken(),
+                AccessToken.getCurrentAccessToken(), //CHANGETHIS
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
@@ -54,16 +54,17 @@ public class FacebookDataRepositiory {
                     Friend[] temp = Arrays.copyOf(friendslist, friendslist.length*2);
                     friendslist = temp;
                 }
+
+                //Sets up object just grab a specific friend
                 JSONObject oneFriend = jarray.getJSONObject(i);
                 String friendname = oneFriend.getString("name");
                 int friendId = oneFriend.getInt("id");
 
-                //Parses through album field to look for Profile Pictures ID
+                //Parses through album field to look for Profile Pictures
                 JSONObject albumsObject = oneFriend.getJSONObject("albums");
                 JSONArray albumData = albumsObject.getJSONArray("data");
                 JSONArray profileAlbum = null;
                 //int profileId = 0; deprecated
-
                 //Looks at each album in the Albums field. thisAlbum represents the specific album
                 //being analyzed.
                 for (int j = 0; j < albumData.length(); j++){
@@ -79,6 +80,7 @@ public class FacebookDataRepositiory {
                     }
 
                 }
+
                 //Parses through data to get to posts object and stores it
                 JSONObject postsData = oneFriend.getJSONObject("posts");
                 JSONArray posts = postsData.getJSONArray("data");
@@ -92,7 +94,7 @@ public class FacebookDataRepositiory {
                 //Updates and stores data in each friend's object
                 Friend thisFriend = new Friend(friendname,friendId);
                 thisFriend.currentProfilePictureUrl = profileUrl;
-                //thisFriend.profilePicAlbumId = profileId;
+                //thisFriend.profilePicAlbumId = profileId; deprecated
                 thisFriend.posts = posts;
                 thisFriend.profilePictures = profileAlbum;
                 friendslist[i] = thisFriend;
@@ -104,26 +106,38 @@ public class FacebookDataRepositiory {
         }
     }
 
-    public void createQuiz(){
+
+    // Creates a new quiz everytime its called using the friendlists
+    public Question[] createQuiz(){
         Random r = new Random();
         Question[] quiz = new Question[MainApp.quizLength];
 
+        //For every question, a random friend is selected
         for (int i = 0; i < MainApp.quizLength;i++) {
+
             int friendselect = r.nextInt(friendslist.length);
             Friend randomFriend = friendslist[friendselect];
+
+            //That friend's id, name, and profile picture are stored
             int friendId = randomFriend.id;
             String friendName = randomFriend.name;
             String picUrl = randomFriend.currentProfilePictureUrl;
 
+            //Random picks between a status post or a profile picture
             int typeNum = r.nextInt(2);
+
+            //initializes variables depending on post or profile picture
             String type = "";
             String displayUrl="";
             String intentUrl="";
             int select = r.nextInt(9999);
+
             //if type is profile picture question;
             if (typeNum == 1){
                 type = "Picture";
                 try {
+                    //Parse through profile pictures to get a random picture. Sets display, intent, and id based off
+                    // the picture
                     JSONArray profilePics = randomFriend.profilePictures;
                     JSONObject randomPicObject = profilePics.getJSONObject(select%profilePics.length());
                     int pictureId = randomPicObject.getInt("id");
@@ -132,22 +146,25 @@ public class FacebookDataRepositiory {
                     /*
                      FOR UI GUYS
                      to call image ui go to stackoverflow.com/questions/5841710/get-user-image-from-facebook-graph-api
-                     do img_value = new URL(blah lahblah) with blahblahablhah being the quiz[i].dataUrl
+                     do img_value = new URL(blah lahblah) with blahblahablhah being the quiz[i].displayUrl
                      */
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-            } else {
+            } else { //if type is a status
                 type = "Post";
                 try{
+                    //Parses through posts of that random friend to get a random post
                     JSONArray posts = randomFriend.posts;
                     JSONObject randomPostObject = posts.getJSONObject(select%posts.length());
+                    //Gets a new post until the random post has a message field
                     while(!randomPostObject.has("message")){
                         select = r.nextInt(9999);
                         randomPostObject = posts.getJSONObject(select%posts.length());
                     }
+                    //Sets display, intent, and message based off post
                     displayUrl = randomPostObject.getString("message");
                     int postId = randomPostObject.getInt("id");
                     intentUrl = "https://facebook.com/" + friendId + "/posts/" + postId;
@@ -156,12 +173,19 @@ public class FacebookDataRepositiory {
                     e.printStackTrace();
                 }
             }
+
+            //Loops through friendslist to grab random names and fills up the answers
             String[] randomAnswers = new String[4];
             for (int j = 0; j < randomAnswers.length; j++) {
                 int numSelect = r.nextInt(friendslist.length);
                 randomAnswers[j] = friendslist[numSelect].name;
             }
 
+            //overwrites a random one to display the correct answer.
+            int answerSelect = r.nextInt(randomAnswers.length);
+            randomAnswers[answerSelect] = friendName;
+
+            //creates a question object at this index of the quiz
             quiz[i] = new Question(
                     type,
                     displayUrl,
@@ -169,11 +193,10 @@ public class FacebookDataRepositiory {
                     friendName,
                     randomAnswers
             );
-
-
-
-
+        //End of for loop
         }
 
+        return quiz;
+        //End of method
     }
 }

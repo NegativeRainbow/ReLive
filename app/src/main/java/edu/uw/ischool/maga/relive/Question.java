@@ -7,7 +7,7 @@ package edu.uw.ischool.maga.relive;
 public class Question {
 
     public String type;
-    public String displayUrl; //Display post/image
+    public String displayUrl; //Display post/image. Is flat string for the status post if type is post
     public String intentUrl; //Intent url to actual post
     public String correctName;
     public String[] nameOptions;
