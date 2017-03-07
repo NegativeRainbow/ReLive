@@ -11,9 +11,12 @@ public class Friend {
     public String name;
     public int id;
     public String currentProfilePictureUrl;
-    public int profilePicAlbumId;
+    public JSONArray posts;
+    public JSONArray profilePictures;
+    //public int profilePicAlbumId;
     public Friend(String name, int id){
         this.name = name;
         this.id = id;
+
     }
 }

@@ -36,7 +36,9 @@ public class FacebookDataRepositiory {
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "friends{name,id,picture{url},albums,posts.limit(99999)}");
+        parameters.putString("fields", "friends{name,id,picture{url},albums{name,photos{picture}},posts.limit(99999)}");
+        //URL TO CHECK JSON, plug below the graph api explorer
+        // /me/friends?fields=name,id,picture{url},albums{name,photos{id,picture}},posts.limit(9999)
         request.setParameters(parameters);
         request.executeAsync();
     }
@@ -59,16 +61,27 @@ public class FacebookDataRepositiory {
                 //Parses through album field to look for Profile Pictures ID
                 JSONObject albumsObject = oneFriend.getJSONObject("albums");
                 JSONArray albumData = albumsObject.getJSONArray("data");
-                int profileId = 0;
+                JSONArray profileAlbum = null;
+                //int profileId = 0; deprecated
+
+                //Looks at each album in the Albums field. thisAlbum represents the specific album
+                //being analyzed.
                 for (int j = 0; j < albumData.length(); j++){
+
                     JSONObject thisAlbum = albumData.getJSONObject(i);
                     String name = thisAlbum.getString("name");
+
                     if (name.equals("Profile Pictures")){
-                        profileId = thisAlbum.getInt("id");
+                        //profileId = thisAlbum.getInt("id"); deprecrated
+                        JSONObject profileAlbumObj = thisAlbum.getJSONObject("photos");
+                        profileAlbum = profileAlbumObj.getJSONArray("data");
                         j = albumData.length();
                     }
-                }
 
+                }
+                //Parses through data to get to posts object and stores it
+                JSONObject postsData = oneFriend.getJSONObject("posts");
+                JSONArray posts = postsData.getJSONArray("data");
 
                 //Parses through the pictures field to get the url of the profile picture
                 JSONObject pictureobject = oneFriend.getJSONObject("picture");
@@ -76,9 +89,12 @@ public class FacebookDataRepositiory {
                 String profileUrl = pictureObjectData.getString("url");
 
                 //Creates a friend object and places it in the specific index of the friends array
+                //Updates and stores data in each friend's object
                 Friend thisFriend = new Friend(friendname,friendId);
                 thisFriend.currentProfilePictureUrl = profileUrl;
-                thisFriend.profilePicAlbumId = profileId;
+                //thisFriend.profilePicAlbumId = profileId;
+                thisFriend.posts = posts;
+                thisFriend.profilePictures = profileAlbum;
                 friendslist[i] = thisFriend;
 
 
@@ -88,14 +104,73 @@ public class FacebookDataRepositiory {
         }
     }
 
-    public Question createQuiz(){
+    public void createQuiz(){
         Random r = new Random();
         Question[] quiz = new Question[MainApp.quizLength];
 
         for (int i = 0; i < MainApp.quizLength;i++) {
             int friendselect = r.nextInt(friendslist.length);
-            int friendId = friendslist[friendselect].id;
-            String friendName = friendslist[friendselect].name;
+            Friend randomFriend = friendslist[friendselect];
+            int friendId = randomFriend.id;
+            String friendName = randomFriend.name;
+            String picUrl = randomFriend.currentProfilePictureUrl;
+
+            int typeNum = r.nextInt(2);
+            String type = "";
+            String displayUrl="";
+            String intentUrl="";
+            int select = r.nextInt(9999);
+            //if type is profile picture question;
+            if (typeNum == 1){
+                type = "Picture";
+                try {
+                    JSONArray profilePics = randomFriend.profilePictures;
+                    JSONObject randomPicObject = profilePics.getJSONObject(select%profilePics.length());
+                    int pictureId = randomPicObject.getInt("id");
+                    displayUrl = randomPicObject.getString("picture");
+                    intentUrl = "https://www.facebook.com/photo.php?fbid=" + pictureId;
+                    /*
+                     FOR UI GUYS
+                     to call image ui go to stackoverflow.com/questions/5841710/get-user-image-from-facebook-graph-api
+                     do img_value = new URL(blah lahblah) with blahblahablhah being the quiz[i].dataUrl
+                     */
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                type = "Post";
+                try{
+                    JSONArray posts = randomFriend.posts;
+                    JSONObject randomPostObject = posts.getJSONObject(select%posts.length());
+                    while(!randomPostObject.has("message")){
+                        select = r.nextInt(9999);
+                        randomPostObject = posts.getJSONObject(select%posts.length());
+                    }
+                    displayUrl = randomPostObject.getString("message");
+                    int postId = randomPostObject.getInt("id");
+                    intentUrl = "https://facebook.com/" + friendId + "/posts/" + postId;
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            String[] randomAnswers = new String[4];
+            for (int j = 0; j < randomAnswers.length; j++) {
+                int numSelect = r.nextInt(friendslist.length);
+                randomAnswers[j] = friendslist[numSelect].name;
+            }
+
+            quiz[i] = new Question(
+                    type,
+                    displayUrl,
+                    intentUrl,
+                    friendName,
+                    randomAnswers
+            );
+
+
 
 
         }
