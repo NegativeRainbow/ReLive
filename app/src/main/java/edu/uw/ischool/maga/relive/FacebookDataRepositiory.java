@@ -24,6 +24,8 @@ public class FacebookDataRepositiory {
     public FacebookDataRepositiory(){
         /* make the API call */
         friendslist = new Friend[10];
+        //Makes a graph api request to grab a json with a list of friends
+        //and the posts, name, id, and albums of that friend
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
@@ -34,15 +36,15 @@ public class FacebookDataRepositiory {
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,friends");
+        parameters.putString("fields", "friends{name,id,picture{url},albums,posts.limit(99999)}");
         request.setParameters(parameters);
         request.executeAsync();
-
     }
 
     public static void readJson(JSONObject object){
         JSONObject friendsobject = null;
         try {
+            //Grabs all friends and then iterates through each friend creating a Friend object
             friendsobject = object.getJSONObject("friends");
             JSONArray jarray = friendsobject.getJSONArray("data");
             for(int i = 0; i < jarray.length();i++) {
@@ -53,7 +55,32 @@ public class FacebookDataRepositiory {
                 JSONObject oneFriend = jarray.getJSONObject(i);
                 String friendname = oneFriend.getString("name");
                 int friendId = oneFriend.getInt("id");
-                friendslist[i] = new Friend(friendname,friendId);
+
+                //Parses through album field to look for Profile Pictures ID
+                JSONObject albumsObject = oneFriend.getJSONObject("albums");
+                JSONArray albumData = albumsObject.getJSONArray("data");
+                int profileId = 0;
+                for (int j = 0; j < albumData.length(); j++){
+                    JSONObject thisAlbum = albumData.getJSONObject(i);
+                    String name = thisAlbum.getString("name");
+                    if (name.equals("Profile Pictures")){
+                        profileId = thisAlbum.getInt("id");
+                        j = albumData.length();
+                    }
+                }
+
+
+                //Parses through the pictures field to get the url of the profile picture
+                JSONObject pictureobject = oneFriend.getJSONObject("picture");
+                JSONObject pictureObjectData=pictureobject.getJSONObject("data");
+                String profileUrl = pictureObjectData.getString("url");
+
+                //Creates a friend object and places it in the specific index of the friends array
+                Friend thisFriend = new Friend(friendname,friendId);
+                thisFriend.currentProfilePictureUrl = profileUrl;
+                thisFriend.profilePicAlbumId = profileId;
+                friendslist[i] = thisFriend;
+
 
             }
         } catch (JSONException e) {
@@ -66,10 +93,11 @@ public class FacebookDataRepositiory {
         Question[] quiz = new Question[MainApp.quizLength];
 
         for (int i = 0; i < MainApp.quizLength;i++) {
-
             int friendselect = r.nextInt(friendslist.length);
             int friendId = friendslist[friendselect].id;
             String friendName = friendslist[friendselect].name;
+
+
         }
 
     }

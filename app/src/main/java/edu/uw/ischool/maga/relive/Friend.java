@@ -1,5 +1,8 @@
 package edu.uw.ischool.maga.relive;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by Kito Pham on 3/5/2017.
  */
@@ -7,7 +10,8 @@ package edu.uw.ischool.maga.relive;
 public class Friend {
     public String name;
     public int id;
-
+    public String currentProfilePictureUrl;
+    public int profilePicAlbumId;
     public Friend(String name, int id){
         this.name = name;
         this.id = id;
