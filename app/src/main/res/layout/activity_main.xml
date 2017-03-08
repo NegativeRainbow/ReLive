@@ -5,7 +5,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="edu.uw.ischool.maga.relive.MainActivity">
 
@@ -24,13 +23,4 @@
         android:id="@+id/fragment">
 
     </FrameLayout>
-
-=======
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.uw.ischool.maga.relive.MainActivity">
-
->>>>>>> d02ffab05129a298aa719893646da293abd4cbdf
 </RelativeLayout>
