@@ -16,6 +16,7 @@
             android:layout_weight=".5"
             android:text="@string/welcome_to_relive_with_this_application_you_can_relive_past_facebook_memories_with_a_fun_game"
             android:layout_marginTop="50dp"
+            android:paddingBottom="10dp"
             android:textAlignment="center"/>
 
         <com.facebook.login.widget.LoginButton
@@ -27,6 +28,7 @@
             android:layout_weight="1"
             android:layout_marginRight="50dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"

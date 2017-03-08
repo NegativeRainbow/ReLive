@@ -10,13 +10,14 @@ public class Question {
     public String dataToShow;
     public String dataURL;
     public String correctName;
-    public String[] nameOptions;
+    public String profPicUrl;
+    public Friend correctFriend;
+    public Friend[] friendOptions;
 
-    public Question(String type, String dataToShow, String dataURL, String correct, String[] nameOptions){
+    public Question(String type, String dataToShow, Friend correct, Friend[] friendOptions){
         this.type = type;
         this.dataToShow = dataToShow;
-        this.dataURL = dataURL;
-        correctName = correct;
-        this.nameOptions = nameOptions;
+        correctFriend = correct;
+        this.friendOptions = friendOptions;
     }
 }
