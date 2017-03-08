@@ -123,8 +123,6 @@ public class FacebookDataRepositiory {
 
             //That friend's id, name, and profile picture are stored
             int friendId = randomFriend.id;
-            String friendName = randomFriend.name;
-            String picUrl = randomFriend.currentProfilePictureUrl;
             int typeNum = MainApp.quizType;
             //Random picks between a status post or a profile picture
             if(MainApp.quizType==2) {
@@ -175,22 +173,21 @@ public class FacebookDataRepositiory {
             }
 
             //Loops through friendslist to grab random names and fills up the answers
-            String[] randomAnswers = new String[4];
+            Friend[] randomAnswers = new Friend[4];
             for (int j = 0; j < randomAnswers.length; j++) {
                 int numSelect = r.nextInt(friendslist.length);
-                randomAnswers[j] = friendslist[numSelect].name;
+                randomAnswers[j] = friendslist[numSelect];
             }
 
             //overwrites a random one to display the correct answer.
             int answerSelect = r.nextInt(randomAnswers.length);
-            randomAnswers[answerSelect] = friendName;
+            randomAnswers[answerSelect] = randomFriend;
 
             //creates a question object at this index of the quiz
             quiz[i] = new Question(
                     type,
-                    displayUrl,
                     intentUrl,
-                    friendName,
+                    randomFriend,
                     randomAnswers
             );
         //End of for loop
