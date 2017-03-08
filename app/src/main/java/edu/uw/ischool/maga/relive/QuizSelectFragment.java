@@ -45,6 +45,7 @@ public class QuizSelectFragment extends Fragment {
                 MainApp.newQuiz();
                 Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
                 Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Intent Url:"+MainApp.quiz[0].dataURL);
                 Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0].name+ " "+ MainApp.quiz[0].friendOptions[1].name+ " "+ MainApp.quiz[0].friendOptions[2].name+ " "+ MainApp.quiz[0].friendOptions[3].name);
                 startActivity(i);
             }
@@ -58,6 +59,7 @@ public class QuizSelectFragment extends Fragment {
                 MainApp.newQuiz();
                 Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
                 Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Intent Url:"+MainApp.quiz[0].dataURL);
                 Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0].name+ " "+ MainApp.quiz[0].friendOptions[1].name+ " "+ MainApp.quiz[0].friendOptions[2].name+ " "+ MainApp.quiz[0].friendOptions[3].name);
 
                 startActivity(i);
@@ -72,6 +74,7 @@ public class QuizSelectFragment extends Fragment {
                 MainApp.newQuiz();
                 Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
                 Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Intent Url:"+MainApp.quiz[0].dataURL);
                 Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0].name+ " "+ MainApp.quiz[0].friendOptions[1].name+ " "+ MainApp.quiz[0].friendOptions[2].name+ " "+ MainApp.quiz[0].friendOptions[3].name);
                 startActivity(i);
             }
