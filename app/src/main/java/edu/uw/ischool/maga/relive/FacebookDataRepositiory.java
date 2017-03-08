@@ -215,10 +215,12 @@ public class FacebookDataRepositiory {
             for (int j = 0; j < randomAnswers.length; j++) {
                 if(j != answerSelect) {
                     int numSelect = r.nextInt(friendslistsize);
-                    while (used.contains(numSelect)) {
-                        numSelect = r.nextInt(friendslistsize);
+                    if(j <= friendslistsize) {
+                        while (used.contains(numSelect)) {
+                            numSelect = r.nextInt(friendslistsize);
+                        }
+                        used.add(numSelect);
                     }
-                    used.add(numSelect);
                     randomAnswers[j] = friendslist[numSelect];
                 }
             }
