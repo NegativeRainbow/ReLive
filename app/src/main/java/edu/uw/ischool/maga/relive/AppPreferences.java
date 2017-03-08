@@ -17,7 +17,9 @@ public class AppPreferences extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preferences);
+        setContentView(R.layout.activity_app_preferences);
+
+
         button = (Button) findViewById(R.id.settings_button);
         quizLengthText = (EditText) findViewById(R.id.quiz_length_answer);
         app = new MainApp();

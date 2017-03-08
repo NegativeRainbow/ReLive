@@ -51,7 +51,8 @@
         </activity>
         <activity
             android:name=".AppPreferences"
-            android:label="@string/title_activity_preferences">>
+            android:label="@string/title_activity_preferences">
+
         </activity>
     </application>
 
