@@ -17,6 +17,7 @@ public class MainApp extends Application {
     public static FacebookDataRepositiory repo;
     public static int current;
     public static boolean correct;
+    public static int correctNum;
 
     public static MainApp getInstance(){
         return singleton;
@@ -29,7 +30,9 @@ public class MainApp extends Application {
 
     @Override
     public void onCreate(){
+        correctNum = 0;
         quizLength = 10;
+        quizTime = 1 * 30 * 1000;
         super.onCreate();
         singleton = this;
         Log.i("App", "Application Launched");
@@ -39,6 +42,7 @@ public class MainApp extends Application {
 
     public static void newQuiz(){
         current = 0;
+        correctNum = 0;
         quiz = repo.createQuiz();
 
     }

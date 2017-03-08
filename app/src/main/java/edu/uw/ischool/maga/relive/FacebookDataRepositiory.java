@@ -209,11 +209,12 @@ public class FacebookDataRepositiory {
             //creates a question object at this index of the quiz
             quiz[i] = new Question(
                     type,
-                    intentUrl,
+                    displayUrl,
                     randomFriend,
                     randomAnswers
             );
             quiz[i].profPicUrl = randomFriend.currentProfilePictureUrl;
+            quiz[i].dataURL = intentUrl;
             Log.i("App","Question " + i + " finished loading");
         //End of for loop
         }
