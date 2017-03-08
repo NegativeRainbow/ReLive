@@ -13,6 +13,7 @@ public class MainApp extends Application {
     public static Question[] quiz; // holds data for the quiz
     public AccessToken accessToken; //access token for user
     public static int quizType;
+    public static FacebookDataRepositiory repo;
 
 
     public static MainApp getInstance(){
