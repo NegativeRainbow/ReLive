@@ -187,8 +187,9 @@ public class FacebookDataRepositiory {
                     }
 
                     //Sets display, intent, and message based off post
+                    String[] separated = randomPostObject.getString("id").split("_");
                     displayUrl = randomPostObject.getString("message");
-                    String postId = randomPostObject.getString("id");
+                    String postId = separated[1];
                     intentUrl = "https://facebook.com/" + friendId + "/posts/" + postId;
 
                 } catch (JSONException e) {
