@@ -125,9 +125,11 @@ public class FacebookDataRepositiory {
             int friendId = randomFriend.id;
             String friendName = randomFriend.name;
             String picUrl = randomFriend.currentProfilePictureUrl;
-
+            int typeNum = MainApp.quizType;
             //Random picks between a status post or a profile picture
-            int typeNum = r.nextInt(2);
+            if(MainApp.quizType==2) {
+                typeNum = r.nextInt(2);
+            }
 
             //initializes variables depending on post or profile picture
             String type = "";
