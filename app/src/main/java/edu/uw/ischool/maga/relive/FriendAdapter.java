@@ -15,6 +15,7 @@ import java.net.URL;
 
 /**
  * Created by Danish on 3/7/2017.
+ * Adapter to put friend objects into answer list, with profile picture on left, text on right
  */
 
 public class FriendAdapter extends ArrayAdapter<Friend> {
