@@ -2,7 +2,11 @@
     <string name="app_name">ReLive</string>
     <string name="facebook_app_id">1635254926781909</string>
 
+
     <string name="fb_login_protocol_scheme">fb1635254926781909</string>
     <string name="title_activity_preferences">Preferences</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_to_relive_with_this_application_you_can_relive_past_facebook_memories_with_a_fun_game">Welcome to ReLive. With this application you can relive past Facebook memories with a fun game.</string>
 
 </resources>
