@@ -14,12 +14,13 @@
     <ImageView
         android:id="@+id/question_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/question_status"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_margin="20dp"
         android:textSize="30sp" />
 
@@ -36,14 +37,14 @@
 
         <Button
             android:id="@+id/answer1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Button" />
 
         <Button
             android:id="@+id/answer2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Button" />
@@ -58,14 +59,14 @@
 
         <Button
             android:id="@+id/answer3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Button" />
 
         <Button
             android:id="@+id/answer4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Button" />

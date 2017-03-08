@@ -49,6 +49,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         }
 
         final View newView = view;
+        TextView questionStatus = (TextView) view.findViewById(R.id.question_status);
+        questionStatus.setVisibility(view.GONE);
         // Checks type of question and sets the question
         if(currentQuestion.type.equals("Picture")){
             ImageView question = (ImageView) view.findViewById(R.id.question_image);
@@ -64,7 +66,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
 
                 Picasso.with(getContext())
                         .load(currentQuestion.dataToShow)
-                        .resize(500, 500)
+                        .resize(800, 800)
                         .into(question);
 
 
@@ -75,6 +77,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         } else if(currentQuestion.type.equals("Post")){
             TextView question = (TextView) view.findViewById(R.id.question_status);
             question.setText(currentQuestion.dataToShow);
+            question.setVisibility(view.VISIBLE);
         } else {
             Log.wtf("QuestionFragment", "Type not defined");
         }
@@ -149,8 +152,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
                     ImageView question = (ImageView) newView.findViewById(R.id.question_image);
                     question.setImageBitmap(null);
 
+
                 }
                 TextView text = (TextView) newView.findViewById(R.id.question_status);
+                text.setVisibility(newView.VISIBLE);
+
                 text.setText("Times Up!!!");
                 intentButton.setVisibility(View.VISIBLE);
                 nextButton.setVisibility(View.VISIBLE);
