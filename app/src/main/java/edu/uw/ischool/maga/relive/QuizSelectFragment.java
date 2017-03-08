@@ -41,8 +41,11 @@ public class QuizSelectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), GameActivity.class);
-                MainApp.quizType = 0; //picture type
+                MainApp.quizType = 1; //picture type
                 MainApp.newQuiz();
+                Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
+                Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0].name+ " "+ MainApp.quiz[0].friendOptions[1].name+ " "+ MainApp.quiz[0].friendOptions[2].name+ " "+ MainApp.quiz[0].friendOptions[3].name);
                 startActivity(i);
             }
         });
@@ -51,11 +54,11 @@ public class QuizSelectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), GameActivity.class);
-                MainApp.quizType = 1; //posts
+                MainApp.quizType = 0; //posts
                 MainApp.newQuiz();
                 Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
-                Log.i("App","Friend Name:"+MainApp.quiz[0].correctName);
-                Log.i("App","Answers:" + MainApp.quiz[0].nameOptions[0]+ " "+ MainApp.quiz[3].nameOptions[0]+ " "+ MainApp.quiz[3].nameOptions[1]+ " "+ MainApp.quiz[3].nameOptions[2]+ " "+ MainApp.quiz[3].nameOptions[3]);
+                Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0].name+ " "+ MainApp.quiz[0].friendOptions[1].name+ " "+ MainApp.quiz[0].friendOptions[2].name+ " "+ MainApp.quiz[0].friendOptions[3].name);
 
                 startActivity(i);
             }
@@ -67,6 +70,9 @@ public class QuizSelectFragment extends Fragment {
                 Intent i = new Intent(getContext(), GameActivity.class);
                 MainApp.quizType = 2; //both
                 MainApp.newQuiz();
+                Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
+                Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0].name+ " "+ MainApp.quiz[0].friendOptions[1].name+ " "+ MainApp.quiz[0].friendOptions[2].name+ " "+ MainApp.quiz[0].friendOptions[3].name);
                 startActivity(i);
             }
         });
