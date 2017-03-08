@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ReLive.iml" filepath="$PROJECT_DIR$/ReLive.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/relive.iml" filepath="$PROJECT_DIR$/relive.iml" />
     </modules>
   </component>
 </project>
