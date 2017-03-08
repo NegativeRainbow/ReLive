@@ -1,4 +1,4 @@
-package edu.uw.ischool.maga.relive;
+/*package edu.uw.ischool.maga.relive;
 
 import android.content.Context;
 import android.net.Uri;
@@ -51,3 +51,4 @@ public class QuestionFragment extends Fragment {
         nameSelect.setAdapter(nameAdapter);
     }
 }
+*/

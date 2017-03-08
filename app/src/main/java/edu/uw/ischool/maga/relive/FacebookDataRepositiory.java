@@ -1,6 +1,7 @@
 package edu.uw.ischool.maga.relive;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -49,8 +50,8 @@ public class FacebookDataRepositiory {
             //Grabs all friends and then iterates through each friend creating a Friend object
             friendsobject = object.getJSONObject("friends");
             JSONArray jarray = friendsobject.getJSONArray("data");
+            Log.i("App", "Java Array size is " + jarray.length());
             for(int i = 0; i < jarray.length();i++) {
-
                 //Friendslist is initialized at 10, if the number of friends from the JSON surpasses 10
                 //then the list will double the size and copy over all existing entries.
                 if (i == friendslist.length){
@@ -61,6 +62,7 @@ public class FacebookDataRepositiory {
                 //Sets up object to just grab one friend
                 JSONObject oneFriend = jarray.getJSONObject(i);
                 String friendname = oneFriend.getString("name");
+                Log.i("App", "Friend name is "+ friendname);
                 int friendId = oneFriend.getInt("id");
 
                 //Parses through album field to look for Profile Pictures
@@ -101,11 +103,12 @@ public class FacebookDataRepositiory {
                 thisFriend.posts = posts;
                 thisFriend.profilePictures = profileAlbum;
                 friendslist[i] = thisFriend;
-
+                Log.i("App","JSON Read finished");
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.i("App", "JSON Read Failure");
         }
     }
 
@@ -193,6 +196,8 @@ public class FacebookDataRepositiory {
                     friendName,
                     randomAnswers
             );
+            quiz[i].profPicUrl = randomFriend.currentProfilePictureUrl;
+            Log.i("App","Question " + i + " finished loading");
         //End of for loop
         }
 

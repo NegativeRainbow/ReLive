@@ -11,6 +11,7 @@ public class Question {
     public String dataURL;
     public String correctName;
     public String[] nameOptions;
+    public String profPicUrl;
 
     public Question(String type, String dataToShow, String dataURL, String correct, String[] nameOptions){
         this.type = type;

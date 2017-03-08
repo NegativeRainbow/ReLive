@@ -1,15 +1,22 @@
 package edu.uw.ischool.maga.relive;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 public class QuizSelectFragment extends Fragment {
+
+    Button postButton;
+    Button picButton;
+    Button bothButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,5 +33,46 @@ public class QuizSelectFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         // Select quiz, set int in MainApp accordingly
+        postButton = (Button) view.findViewById(R.id.postSelect);
+        picButton = (Button) view.findViewById(R.id.pictureSelect);
+        bothButton = (Button) view.findViewById(R.id.bothSelect);
+
+        picButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), GameActivity.class);
+                MainApp.quizType = 0; //picture type
+                MainApp.newQuiz();
+                startActivity(i);
+            }
+        });
+
+        postButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), GameActivity.class);
+                MainApp.quizType = 1; //posts
+                MainApp.newQuiz();
+                Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
+                Log.i("App","Friend Name:"+MainApp.quiz[0].correctName);
+                Log.i("App","Answers:" + MainApp.quiz[0].nameOptions[0]+ " "+ MainApp.quiz[3].nameOptions[0]+ " "+ MainApp.quiz[3].nameOptions[1]+ " "+ MainApp.quiz[3].nameOptions[2]+ " "+ MainApp.quiz[3].nameOptions[3]);
+
+                startActivity(i);
+            }
+        });
+
+        bothButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), GameActivity.class);
+                MainApp.quizType = 2; //both
+                MainApp.newQuiz();
+                startActivity(i);
+            }
+        });
+
+
+
+
     }
 }

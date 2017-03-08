@@ -21,12 +21,22 @@ public class MainActivity extends AppCompatActivity implements FacebookLoginFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+
+        MainApp main = new MainApp();
+        /*Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        */
+
         fragment = FacebookLoginFragment.newInstance();
+
         android.support.v4.app.FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.fragment, fragment);
+        tx.replace(R.id.login, fragment);
         tx.commit();
+
+        android.support.v4.app.FragmentManager fragManager = getSupportFragmentManager();
+        fragManager.beginTransaction()
+                .replace(R.id.quizButtons,new QuizSelectFragment())
+                .commit();
 
     }
 

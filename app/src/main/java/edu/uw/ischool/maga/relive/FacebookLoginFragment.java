@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,8 +90,10 @@ public class FacebookLoginFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                MainApp mainApp = new MainApp();
-                mainApp.accessToken = loginResult.getAccessToken();
+                /*MainApp mainApp = new MainApp();*/
+                MainApp.accessToken = loginResult.getAccessToken();
+                Log.i("App", "Access token:" + MainApp.accessToken);
+                MainApp.makeRepo();
             }
 
             @Override
