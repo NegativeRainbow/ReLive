@@ -64,7 +64,7 @@ public class FacebookDataRepositiory {
                 JSONObject oneFriend = jarray.getJSONObject(i);
                 String friendname = oneFriend.getString("name");
                 Log.i("App", "Friend name is "+ friendname);
-                String friendId = oneFriend.getString("id");
+                int friendId = oneFriend.getInt("id");
                 Log.i("App", "Friend id is "+ friendId);
 
                 //Parses through album field to look for Profile Pictures
@@ -130,9 +130,12 @@ public class FacebookDataRepositiory {
             Log.i("App","Random friend select num is " + friendselect);
             Friend randomFriend = friendslist[friendselect];
             //That friend's id, name, and profile picture are stored
-            String friendId = randomFriend.id;
+
+
             String friendName = randomFriend.name;
             String picUrl = randomFriend.currentProfilePictureUrl;
+            int friendId = randomFriend.id;
+
             int typeNum = MainApp.quizType;
             //Random picks between a status post or a profile picture
             if(MainApp.quizType==2) {
@@ -192,22 +195,22 @@ public class FacebookDataRepositiory {
             }
 
             //Loops through friendslist to grab random names and fills up the answers
-            String[] randomAnswers = new String[4];
+            Friend[] randomAnswers = new Friend[4];
             for (int j = 0; j < randomAnswers.length; j++) {
                 int numSelect = r.nextInt(friendslistsize);
-                randomAnswers[j] = friendslist[numSelect].name;
+                randomAnswers[j] = friendslist[numSelect];
+
             }
 
             //overwrites a random one to display the correct answer.
             int answerSelect = r.nextInt(randomAnswers.length);
-            randomAnswers[answerSelect] = friendName;
+            randomAnswers[answerSelect] = randomFriend;
 
             //creates a question object at this index of the quiz
             quiz[i] = new Question(
                     type,
-                    displayUrl,
                     intentUrl,
-                    friendName,
+                    randomFriend,
                     randomAnswers
             );
             quiz[i].profPicUrl = randomFriend.currentProfilePictureUrl;

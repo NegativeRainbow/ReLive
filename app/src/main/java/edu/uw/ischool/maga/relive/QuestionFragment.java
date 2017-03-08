@@ -1,16 +1,25 @@
-/*package edu.uw.ischool.maga.relive;
+package edu.uw.ischool.maga.relive;
 
-import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.net.URL;
 
 public class QuestionFragment extends Fragment {
 
@@ -29,26 +38,52 @@ public class QuestionFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-        Question currentQuestion = MainApp.quiz[MainApp.current]; // Set current to be current question
-        ListView nameSelect = (ListView) view.findViewById(R.id.select_name);
+        final Question currentQuestion = MainApp.quiz[MainApp.current]; // Set current to be current question
 
-        ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                currentQuestion.nameOptions
-        );
-        nameAdapter.setOnItemClickListener(New AdapterView.OnItemClickListener(){
+        if(currentQuestion.type.equals("Picture")){
+            ImageView question = (ImageView) this.getActivity().findViewById(R.id.question_image);
+            try {
+                URL url = new URL(currentQuestion.dataToShow);
+                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                question.setImageBitmap(bmp);
+            } catch (Exception e){
+                Log.e("QuestionFragment", "Couldn't load image");
+                question.setImageResource(android.R.drawable.star_on);
+            }
+        } else if(currentQuestion.type.equals("Post")){
+            TextView question = (TextView) this.getActivity().findViewById(R.id.question_status);
+            question.setText(currentQuestion.dataToShow);
+        } else {
+            Log.wtf("QuestionFragment", "Type not defined");
+        }
+
+        ListView nameSelect = (ListView) view.findViewById(R.id.select_name);
+        final TextView timer = (TextView) view.findViewById(R.id.quiz_timer);
+        new CountDownTimer(MainApp.quizTime, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText(millisUntilFinished / 1000 + " seconds remaining");
+            }
+
+            public void onFinish() {
+                MainApp.correct = false;
+                FragmentTransaction tx = getFragmentManager().beginTransaction();
+                tx.replace(R.id.fragment, new AnswerFragment());
+                tx.commit();
+            }
+        }.start();
+
+        FriendAdapter nameAdapter = new FriendAdapter(this.getActivity(),
+                R.layout.listview_friend, currentQuestion.friendOptions);
+        nameSelect.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(currentQuestion.nameOptions[i].equals(currentQuestion.correctName)){
-                    // Go to answer fragment as correct
-                } else {
-                    // Go to answer fragment as incorrect
-                }
+                MainApp.correct = currentQuestion.friendOptions[i].equals(currentQuestion.correctFriend);
+                FragmentTransaction tx = getFragmentManager().beginTransaction();
+                tx.replace(R.id.fragment, new AnswerFragment());
+                tx.commit();
             }
         });
         nameSelect.setAdapter(nameAdapter);
     }
 }
-*/

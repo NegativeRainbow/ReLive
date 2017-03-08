@@ -54,8 +54,8 @@ public class QuizSelectFragment extends Fragment {
                 MainApp.quizType = 1; //posts
                 MainApp.newQuiz();
                 Log.i("App","Display:"+MainApp.quiz[0].dataToShow);
-                Log.i("App","Friend Name:"+MainApp.quiz[0].correctName);
-                Log.i("App","Answers:" + MainApp.quiz[0].nameOptions[0]+ " "+ MainApp.quiz[3].nameOptions[0]+ " "+ MainApp.quiz[3].nameOptions[1]+ " "+ MainApp.quiz[3].nameOptions[2]+ " "+ MainApp.quiz[3].nameOptions[3]);
+                Log.i("App","Friend Name:"+MainApp.quiz[0].correctFriend.name);
+                Log.i("App","Answers:" + MainApp.quiz[0].friendOptions[0]+ " "+ MainApp.quiz[3].friendOptions[0].name+ " "+ MainApp.quiz[3].friendOptions[1].name+ " "+ MainApp.quiz[3].friendOptions[2].name+ " "+ MainApp.quiz[3].friendOptions[3].name);
 
                 startActivity(i);
             }

@@ -9,5 +9,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        android.support.v4.app.FragmentManager fragManager = getSupportFragmentManager();
+        fragManager.beginTransaction()
+                .replace(R.id.fragment,new QuestionFragment())
+                .commit();
     }
 }

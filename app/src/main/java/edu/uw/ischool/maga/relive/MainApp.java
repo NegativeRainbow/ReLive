@@ -16,6 +16,7 @@ public class MainApp extends Application {
     public static int quizType;
     public static FacebookDataRepositiory repo;
     public static int current;
+    public static boolean correct;
 
     public static MainApp getInstance(){
         return singleton;

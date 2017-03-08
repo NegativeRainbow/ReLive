@@ -9,12 +9,12 @@ import org.json.JSONObject;
 
 public class Friend {
     public String name;
-    public String id;
+    public int id;
     public String currentProfilePictureUrl;
     public JSONArray posts;
     public JSONArray profilePictures;
     //public int profilePicAlbumId;
-    public Friend(String name, String id){
+    public Friend(String name, int id){
         this.name = name;
         this.id = id;
 
