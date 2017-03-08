@@ -36,9 +36,6 @@ public class FacebookLoginFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
 
-    private static final String ARG_PARAM3 = "loginbutton";
-
-    // TODO: Rename and change types of parameters
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
@@ -53,15 +50,6 @@ public class FacebookLoginFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     *
-     * @return A new instance of fragment FacebookLoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FacebookLoginFragment newInstance() {
-        FacebookLoginFragment fragment = new FacebookLoginFragment();
-        Bundle args = new Bundle();
-
-
      * @return A new instance of fragment FacebookLoginFragment.
      */
     // TODO: Rename and change types and number of parameters
