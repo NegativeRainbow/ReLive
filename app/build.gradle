@@ -30,7 +30,7 @@ dependencies {
     })
 
 
-    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.facebook.android:facebook-android-sdk:4.19.0'
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

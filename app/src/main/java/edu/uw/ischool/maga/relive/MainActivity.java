@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements FacebookLoginFrag
                     .replace(R.id.quizButtons, new splashFragment())
                     .commit();
         } else {
-            fragmentCreater();
+            MainApp.makeRepo();
+            startLoadingScreen();
         }
 
         accessTokenTracker = new AccessTokenTracker() {

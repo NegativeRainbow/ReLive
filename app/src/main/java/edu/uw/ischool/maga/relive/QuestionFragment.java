@@ -1,9 +1,11 @@
 package edu.uw.ischool.maga.relive;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class QuestionFragment extends Fragment implements View.OnClickListener{
@@ -31,6 +36,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
     Button answer3;
     Button answer4;
     Button correct;
+    Button intentButton;
+    Button nextButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +83,27 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         answer2 = (Button) view.findViewById(R.id.answer2);
         answer3 = (Button) view.findViewById(R.id.answer3);
         answer4 = (Button) view.findViewById(R.id.answer4);
+        intentButton = (Button) view.findViewById(R.id.intentButton);
+        intentButton.setVisibility(view.GONE);
+        intentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri intentUrl =  Uri.parse(currentQuestion.dataURL);
+                Intent intent = new Intent(Intent.ACTION_VIEW, intentUrl);
+                startActivity(intent);
 
+
+            }
+        });
+
+        nextButton = (Button) view.findViewById(R.id.next);
+        nextButton.setVisibility(view.GONE);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GameActivity.nextQuestion();
+            }
+        });
 
         answer1.setText(currentQuestion.friendOptions[0].name);
         answer1.setOnClickListener(this);
@@ -124,6 +151,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
                 }
                 TextView text = (TextView) newView.findViewById(R.id.question_status);
                 text.setText("Times Up!!!");
+                intentButton.setVisibility(View.VISIBLE);
+                nextButton.setVisibility(View.VISIBLE);
+                if(MainApp.current == MainApp.quizLength){
+                    nextButton.setText("Finish");
+                }
             }
         }.start();
 
@@ -183,7 +215,13 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
                 correct.setBackgroundColor(Color.GREEN);
                 break;
         }
+        intentButton.setVisibility(View.VISIBLE);
+        nextButton.setVisibility(View.VISIBLE);
         MainApp.current++;
-        GameActivity.nextQuestion();
+
+        if(MainApp.current == MainApp.quizLength){
+            nextButton.setText("Finish");
+        }
+
     }
 }
