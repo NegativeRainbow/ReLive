@@ -106,6 +106,8 @@ public class FacebookDataRepositiory {
                 Log.i("App","JSON Read finished");
 
             }
+            // get buttons frag
+            MainActivity.fragmentCreater();
         } catch (JSONException e) {
             e.printStackTrace();
             Log.i("App", "JSON Read Failure");

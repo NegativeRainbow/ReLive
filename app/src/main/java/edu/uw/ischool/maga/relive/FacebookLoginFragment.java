@@ -91,9 +91,14 @@ public class FacebookLoginFragment extends Fragment {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 /*MainApp mainApp = new MainApp();*/
+
+                // when log in set var equal true
+                // MainActivity.loggedIn = true;
+
                 MainApp.accessToken = loginResult.getAccessToken();
                 Log.i("App", "Access token:" + MainApp.accessToken);
                 MainApp.makeRepo();
+                MainActivity.startLoadingScreen();
             }
 
             @Override
