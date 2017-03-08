@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class FriendAdapter extends ArrayAdapter<Friend> {
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             holder.profPic.setImageBitmap(bmp);
         } catch (Exception e){
+            Log.e("FriendAdapter", "Couldn't load image");
             holder.profPic.setImageResource(android.R.drawable.star_on);
         }
 
