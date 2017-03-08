@@ -30,7 +30,7 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         Question currentQuestion = MainApp.quiz[MainApp.current]; // Set current to be current question
-        ListView nameSelect = (ListView) findViewById(R.id.select_name);
+        ListView nameSelect = (ListView) view.findViewById(R.id.select_name);
         ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,

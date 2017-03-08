@@ -14,6 +14,7 @@ public class MainApp extends Application {
     public AccessToken accessToken; //access token for user
     public static int quizType;
     public static FacebookDataRepositiory repo;
+    public static int current;
 
 
     public static MainApp getInstance(){
@@ -30,6 +31,13 @@ public class MainApp extends Application {
         super.onCreate();
         singleton = this;
         Log.i("App", "Application Launched");
+        repo = new FacebookDataRepositiory();
+
+    }
+
+    public void newQuiz(){
+        current = 0;
+        quiz = repo.createQuiz();
 
     }
 }
