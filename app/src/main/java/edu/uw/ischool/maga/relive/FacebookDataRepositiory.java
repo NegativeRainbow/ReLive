@@ -24,6 +24,7 @@ public class FacebookDataRepositiory {
     public FacebookDataRepositiory(){
         /* make the API call */
         friendslist = new Friend[10];
+
         //Makes a graph api request to grab a json with a list of friends
         //and the posts, name, id, and albums of that friend
         GraphRequest request = GraphRequest.newMeRequest(
