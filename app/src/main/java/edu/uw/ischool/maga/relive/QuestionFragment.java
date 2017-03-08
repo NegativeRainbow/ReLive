@@ -133,7 +133,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         }
         //End Button Stuff
 
-        // Sets up countdown timer and listview
+        // Sets up countdown timer and listview (listview commented out)
         /*ListView nameSelect = (ListView) view.findViewById(R.id.select_name);*/
         final TextView timer = (TextView) view.findViewById(R.id.quiz_timer);
         new CountDownTimer(MainApp.quizTime, 1000) {
@@ -151,8 +151,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
                 if(currentQuestion.type.equals("Picture")){
                     ImageView question = (ImageView) newView.findViewById(R.id.question_image);
                     question.setImageBitmap(null);
-
-
                 }
                 TextView text = (TextView) newView.findViewById(R.id.question_status);
                 text.setVisibility(newView.VISIBLE);

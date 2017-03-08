@@ -12,7 +12,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by Kito Pham on 3/5/2017.
@@ -202,16 +206,22 @@ public class FacebookDataRepositiory {
             }
 
             //Loops through friendslist to grab random names and fills up the answers
+            //Makes sure each answer is unique, and that one is the correct answer
             Friend[] randomAnswers = new Friend[4];
-            for (int j = 0; j < randomAnswers.length; j++) {
-                int numSelect = r.nextInt(friendslistsize);
-                randomAnswers[j] = friendslist[numSelect];
-
-            }
-
-            //overwrites a random one to display the correct answer.
             int answerSelect = r.nextInt(randomAnswers.length);
             randomAnswers[answerSelect] = randomFriend;
+            Set<Integer> used = new HashSet<Integer>();
+            used.add(friendselect);
+            for (int j = 0; j < randomAnswers.length; j++) {
+                if(j != answerSelect) {
+                    int numSelect = r.nextInt(friendslistsize);
+                    while (used.contains(numSelect)) {
+                        numSelect = r.nextInt(friendslistsize);
+                    }
+                    used.add(numSelect);
+                    randomAnswers[j] = friendslist[numSelect];
+                }
+            }
 
             //creates a question object at this index of the quiz
             quiz[i] = new Question(
