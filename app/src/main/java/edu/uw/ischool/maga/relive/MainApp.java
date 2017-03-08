@@ -3,12 +3,15 @@ package  edu.uw.ischool.maga.relive;
 import android.app.Application;
 import android.util.Log;
 
+import com.facebook.AccessToken;
+
 public class MainApp extends Application {
 
     private static MainApp singleton;
     public int quizLength; //# of questions
     public int quizTime; // how long the quiz is
     public Quiz current; // holds data for the quiz
+    public AccessToken accessToken; //holds access token data for user
 
     public static MainApp getInstance(){
         return singleton;
