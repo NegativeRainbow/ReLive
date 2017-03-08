@@ -26,15 +26,8 @@ import java.util.Arrays;
  * create an instance of this fragment.
  */
 public class FacebookLoginFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "loginbutton";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
 
@@ -44,20 +37,13 @@ public class FacebookLoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+    /*
      * @return A new instance of fragment FacebookLoginFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FacebookLoginFragment newInstance(String param1, String param2) {
+    public static FacebookLoginFragment newInstance() {
         FacebookLoginFragment fragment = new FacebookLoginFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,9 +51,9 @@ public class FacebookLoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        callbackManager = CallbackManager.Factory.create();
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -75,7 +61,6 @@ public class FacebookLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_facebook_login, container, false);
-        callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("user_status"));
         loginButton.setFragment(this);
@@ -84,7 +69,8 @@ public class FacebookLoginFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                MainApp mainApp = new MainApp();
+                mainApp.accessToken = loginResult.getAccessToken();
             }
 
             @Override
