@@ -22,6 +22,11 @@ public class GameActivity extends AppCompatActivity {
             fragManager.beginTransaction()
                     .replace(R.id.fragment, new QuestionFragment())
                     .commit();
+        } else {
+            // NOT DONT YET TODO
+            fragManager.beginTransaction()
+                    .replace(R.id.fragment, new AnswerFragment())
+                    .commit();
         }
     }
 }
