@@ -34,7 +34,7 @@ public class QuestionFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-        Question currentQuestion = MainApp.quiz[MainApp.current]; // Set current to be current question
+        final Question currentQuestion = MainApp.quiz[MainApp.current]; // Set current to be current question
         ListView nameSelect = (ListView) view.findViewById(R.id.select_name);
         final TextView timer = (TextView) view.findViewById(R.id.quiz_timer);
         new CountDownTimer(MainApp.quizTime, 1000) {
@@ -57,7 +57,7 @@ public class QuestionFragment extends Fragment {
                 android.R.id.text1,
                 currentQuestion.nameOptions
         );
-        nameSelect.setOnItemClickListener(New AdapterView.OnItemClickListener(){
+        nameSelect.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MainApp.correct = currentQuestion.nameOptions[i].equals(currentQuestion.correctName);
