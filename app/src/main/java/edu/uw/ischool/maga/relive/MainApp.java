@@ -8,9 +8,10 @@ import com.facebook.AccessToken;
 public class MainApp extends Application {
 
     private static MainApp singleton;
-    public int quizLength; //# of questions
-    public int quizTime; // how long the quiz is
-    public Quiz current; // holds data for the quiz
+    public static int quizLength; //# of questions
+    public static int quizTime; // how long the quiz is
+    public static Question[] quiz;
+    public static int current;// holds data for the quiz
     public AccessToken accessToken;
 
     public static MainApp getInstance(){
