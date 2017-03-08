@@ -1,5 +1,6 @@
 package edu.uw.ischool.maga.relive;
 
+<<<<<<< HEAD
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,11 +17,18 @@ import java.util.prefs.Preferences;
 public class MainActivity extends AppCompatActivity implements FacebookLoginFragment.OnFragmentInteractionListener {
 
     private Fragment fragment; //Facebook Log In Fragment
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+>>>>>>> d02ffab05129a298aa719893646da293abd4cbdf
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         fragment = FacebookLoginFragment.newInstance();
@@ -56,5 +64,7 @@ public class MainActivity extends AppCompatActivity implements FacebookLoginFrag
                 return super.onOptionsItemSelected(item);
 
         }
+=======
+>>>>>>> d02ffab05129a298aa719893646da293abd4cbdf
     }
 }
