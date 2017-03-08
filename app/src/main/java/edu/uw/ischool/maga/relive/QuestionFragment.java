@@ -40,6 +40,7 @@ public class QuestionFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         final Question currentQuestion = MainApp.quiz[MainApp.current]; // Set current to be current question
 
+        // Checks type of question and sets the question
         if(currentQuestion.type.equals("Picture")){
             ImageView question = (ImageView) this.getActivity().findViewById(R.id.question_image);
             try {
@@ -57,6 +58,7 @@ public class QuestionFragment extends Fragment {
             Log.wtf("QuestionFragment", "Type not defined");
         }
 
+        // Sets up countdown timer and listview
         ListView nameSelect = (ListView) view.findViewById(R.id.select_name);
         final TextView timer = (TextView) view.findViewById(R.id.quiz_timer);
         new CountDownTimer(MainApp.quizTime, 1000) {
@@ -73,8 +75,10 @@ public class QuestionFragment extends Fragment {
             }
         }.start();
 
+
+        // Goes to answer fragment with with the answer marked as correct or not correct
         FriendAdapter nameAdapter = new FriendAdapter(this.getActivity(),
-                R.layout.listview_friend, currentQuestion.friendOptions);
+                R.layout.listview_friend, currentQuestion.friendOptions); // listview_friend resource is in layout resources, can edit in there
         nameSelect.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
