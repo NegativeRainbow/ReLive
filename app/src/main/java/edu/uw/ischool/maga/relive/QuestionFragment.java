@@ -1,8 +1,6 @@
 package edu.uw.ischool.maga.relive;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 
@@ -55,8 +55,19 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
             try {
                 Log.i("App", "Url for Image" + currentQuestion.dataToShow);
                 URL url = new URL(currentQuestion.dataToShow);
-                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                question.setImageBitmap(bmp);
+                /*Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                question.setImageBitmap(bmp);*/
+
+                /*InputStream is = (InputStream) new URL(currentQuestion.dataToShow).getContent();
+                Drawable d = Drawable.createFromStream(is,"src name");
+                question.setImageDrawable(d);*/
+
+                Picasso.with(getContext())
+                        .load(currentQuestion.dataToShow)
+                        .resize(500, 500)
+                        .into(question);
+
+
             } catch (Exception e){
                 Log.e("QuestionFragment", "Couldn't load image");
                 question.setImageResource(android.R.drawable.star_on);

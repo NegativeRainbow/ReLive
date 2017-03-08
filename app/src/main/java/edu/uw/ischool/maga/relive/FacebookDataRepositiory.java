@@ -47,6 +47,8 @@ public class FacebookDataRepositiory {
 
     public static void readJson(JSONObject object){
         JSONObject friendsobject = null;
+        friendslist = new Friend[10];
+        friendslistsize = 0;
         try {
             //Grabs all friends and then iterates through each friend creating a Friend object
             friendsobject = object.getJSONObject("friends");
@@ -159,7 +161,9 @@ public class FacebookDataRepositiory {
                     JSONArray profilePics = randomFriend.profilePictures;
                     int select = r.nextInt(profilePics.length());
                     JSONObject randomPicObject = profilePics.getJSONObject(select);
-                    int pictureId = randomPicObject.getInt("id");
+                    Log.i("App","Picture Id is" + randomPicObject.getString("id"));
+                    Log.i("App","Picture Id is" + randomPicObject.getInt("id"));
+                    String pictureId = randomPicObject.getString("id");
                     displayUrl = randomPicObject.getString("picture");
                     intentUrl = "https://www.facebook.com/photo.php?fbid=" + pictureId;
 
