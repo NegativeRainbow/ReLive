@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -50,7 +51,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
 
         final View newView = view;
         TextView questionStatus = (TextView) view.findViewById(R.id.question_status);
-        questionStatus.setVisibility(view.GONE);
+        ScrollView scroll = (ScrollView) view.findViewById(R.id.scroll);
+        scroll.setVisibility(view.GONE);
         // Checks type of question and sets the question
         if(currentQuestion.type.equals("Picture")){
             ImageView question = (ImageView) view.findViewById(R.id.question_image);
@@ -66,7 +68,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
 
                 Picasso.with(getContext())
                         .load(currentQuestion.dataToShow)
-                        .resize(800, 800)
+                        .resize(500, 500)
                         .into(question);
 
 
@@ -76,8 +78,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
             }
         } else if(currentQuestion.type.equals("Post")){
             TextView question = (TextView) view.findViewById(R.id.question_status);
+            scroll = (ScrollView) view.findViewById(R.id.scroll);
             question.setText(currentQuestion.dataToShow);
-            question.setVisibility(view.VISIBLE);
+            scroll.setVisibility(view.VISIBLE);
         } else {
             Log.wtf("QuestionFragment", "Type not defined");
         }
@@ -148,14 +151,18 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
                 answer3.setBackgroundColor(Color.RED);
                 answer4.setBackgroundColor(Color.RED);
                 correct.setBackgroundColor(Color.GREEN);
-                if(currentQuestion.type.equals("Picture")){
-                    ImageView question = (ImageView) newView.findViewById(R.id.question_image);
-                    question.setImageBitmap(null);
-                }
-                TextView text = (TextView) newView.findViewById(R.id.question_status);
+
+                TextView text = (TextView) newView.findViewById(R.id.quiz_timer);
                 text.setVisibility(newView.VISIBLE);
 
                 text.setText("Times Up!!!");
+
+                answer1.setEnabled(false);
+                answer2.setEnabled(false);
+                answer3.setEnabled(false);
+                answer4.setEnabled(false);
+                correct.setEnabled(false);
+
                 intentButton.setVisibility(View.VISIBLE);
                 nextButton.setVisibility(View.VISIBLE);
                 if(MainApp.current == MainApp.quizLength){
@@ -222,6 +229,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         }
         intentButton.setVisibility(View.VISIBLE);
         nextButton.setVisibility(View.VISIBLE);
+        answer1.setEnabled(false);
+        answer2.setEnabled(false);
+        answer3.setEnabled(false);
+        answer4.setEnabled(false);
+        correct.setEnabled(false);
         MainApp.current++;
 
         if(MainApp.current == MainApp.quizLength){

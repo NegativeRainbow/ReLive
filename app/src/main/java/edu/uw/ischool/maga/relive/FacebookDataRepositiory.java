@@ -212,7 +212,7 @@ public class FacebookDataRepositiory {
             randomAnswers[answerSelect] = randomFriend;
             Set<Integer> used = new HashSet<Integer>();
             used.add(friendselect);
-            for (int j = 0; j < randomAnswers.length; j++) {
+            for (int j = 0; j < 4; j++) {
                 if(j != answerSelect) {
                     int numSelect = r.nextInt(friendslistsize);
                     if(j <= friendslistsize) {
@@ -224,6 +224,7 @@ public class FacebookDataRepositiory {
                     randomAnswers[j] = friendslist[numSelect];
                 }
             }
+
 
             //creates a question object at this index of the quiz
             quiz[i] = new Question(

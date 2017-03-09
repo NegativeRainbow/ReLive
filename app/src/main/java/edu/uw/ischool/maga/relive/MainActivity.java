@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
 import java.util.prefs.Preferences;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements FacebookLoginFrag
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(this);
+
         setContentView(R.layout.activity_main);
 
         MainApp main = new MainApp();

@@ -59,7 +59,7 @@ public class AppPreferences extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.toString().trim().length()==0){return;}
-                else{app.quizTime = Integer.parseInt(quizLengthText.getText().toString()) * 1000;
+                else{app.quizTime = Integer.parseInt(quizTimeLength.getText().toString()) * 1000;
                 }
             }
         });
@@ -71,7 +71,7 @@ public class AppPreferences extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(AppPreferences.this, MainActivity.class);
                 app.quizLength = (Integer.parseInt(quizLengthText.getText().toString()));
-                app.quizTime = Integer.parseInt(quizLengthText.getText().toString()) * 1000;
+                app.quizTime = Integer.parseInt(quizTimeLength.getText().toString()) * 1000;
                 startActivity(i);
             }
         });
